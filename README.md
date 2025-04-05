@@ -1,6 +1,5 @@
 # PROJECT OVERVIEW:
-
-1.  **Title:** Adaptive Resource Allocation in Multiprogramming Systems
+# Title: Adaptive Resource Allocation in Multiprogramming Systems
 2.  **Goal:**
 
     To build a system that monitors CPU and memory usage across multiple running programs and dynamically reallocates resources in real-time to optimize performance and avoid bottlenecks.
