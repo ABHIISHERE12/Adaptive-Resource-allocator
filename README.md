@@ -50,7 +50,9 @@
 
 # FLOW CHART:
 
-(Note: Flow chart content not provided. Please provide flow chart information for conversion.)
+![image](https://github.com/user-attachments/assets/c5836bb6-77ca-42e2-89c0-ec212aeeacb9)
+
+![image](https://github.com/user-attachments/assets/827cd65c-d3d7-4ba3-bdbf-fee66cbce197)
 
 
 # CONCLUSION:
@@ -151,3 +153,10 @@ To develop a smart system that dynamically monitors and reallocates CPU and memo
 # PROBLEM STATEMENT:
 
 Adaptive Resource Allocation in Multiprogramming Systems Description: Develop a system that dynamically adjusts resource allocation among multiple programs to optimize CPU and memory utilization. The solution should monitor system performance and reallocate resources in real-time to prevent bottlenecks.
+
+# SOLUTION:
+![image](https://github.com/user-attachments/assets/ff58b949-8089-49b6-bb69-1980993d6859)
+![image](https://github.com/user-attachments/assets/76b9272a-4a16-4e88-a085-757742eafd10)
+![image](https://github.com/user-attachments/assets/f625dd45-c592-4638-8d2f-7f74934fa878)
+![image](https://github.com/user-attachments/assets/bbebaab1-87cd-4465-b6ca-140956d139d2)
+![image](https://github.com/user-attachments/assets/45817228-9512-4a4f-9441-58e2df34452e)
