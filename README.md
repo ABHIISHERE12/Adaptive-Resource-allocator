@@ -1,13 +1,13 @@
 # PROJECT OVERVIEW:
 # Title: Adaptive Resource Allocation in Multiprogramming Systems
-2.  **Goal:**
+1.  **Goal:**
 
     To build a system that monitors CPU and memory usage across multiple running programs and dynamically reallocates resources in real-time to optimize performance and avoid bottlenecks.
-3.  **Expected Outcomes:**
+2.  **Expected Outcomes:**
     1.  Improved CPU and memory utilization.
     2.  Prevention of resource starvation or overconsumption by any single process.
     3.  Real-time monitoring and adjustment of allocations.
-4.  **Scope:**
+3.  **Scope:**
     1.  Works in a simulated or real OS environment.
     2.  Applicable to systems with moderate to high process concurrency.
     3.  Includes both monitoring and decision-making components.
