@@ -1,85 +1,98 @@
-#include <iostream>
-#include <vector>
-using namespace std;
-
-class Program {
-public:
-    int id;
-    double cpuUsage;
-    double memoryUsage;
-
-    Program(int i, double cpu, double mem) {
-        id = i;
-        cpuUsage = cpu;
-        memoryUsage = mem;
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="ostyle.css">
+  <title>Resource Manager</title>
+  <style>
+    body {
+      font-family: Arial;
+      margin: 20px;
     }
-};
-
-class ResourceManager {
-private:
-    vector<Program> programs;
-    double totalCPU;
-    double totalMemory;
-
-public:
-    ResourceManager(double cpu, double mem) {
-        totalCPU = cpu;
-        totalMemory = mem;
+    label, input {
+      display: block;
+      margin: 5px 0;
     }
-
-    void addProgram(int id, double cpu, double mem) {
-        programs.push_back(Program(id, cpu, mem));
+    .program-block {
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 10px;
     }
+  </style>
+</head>
+<body>
+    <div class="main">
+        <div class="box">
+            <h2>Resource Manager</h2>
+        </div>
+        
+        
+        <label>Total CPU Capacity (%)</label>
+        <input type="number" id="totalCPU" />
+        
+        <label>Total Memory Capacity (MB)</label>
+        <input type="number" id="totalMem" />
+        
+        <label>Number of Programs</label>
+        <input type="number" id="numPrograms" />
+        <button onclick="generateInputs()">Set Programs</button>
+        
+        <div id="programInputs"></div>
+        <button onclick="processResources()">Optimize & Display Allocation</button>
+        
+        <pre id="output"></pre>        
+    </div>
 
-    void optimizeResources() {
-        double totalUsedCPU = 0, totalUsedMem = 0;
-        for (auto p : programs) {
-            totalUsedCPU += p.cpuUsage;
-            totalUsedMem += p.memoryUsage;
-        }
-        if (totalUsedCPU > totalCPU || totalUsedMem > totalMemory) {
-            cout << "Optimizing resources...\n";
-            for (auto &p : programs) {
-                p.cpuUsage = (p.cpuUsage / totalUsedCPU) * totalCPU;
-                p.memoryUsage = (p.memoryUsage / totalUsedMem) * totalMemory;
-            }
-        }
+<script>
+  function generateInputs() {
+    const container = document.getElementById("programInputs");
+    container.innerHTML = "";
+    const num = parseInt(document.getElementById("numPrograms").value);
+    for (let i = 1; i <= num; i++) {
+      container.innerHTML += `
+        <div class="program-block">
+          <label>Program ${i} CPU Usage (%)</label>
+          <input type="number" class="cpu" id="cpu${i}" />
+          <label>Program ${i} Memory Usage (MB)</label>
+          <input type="number" class="mem" id="mem${i}" />
+        </div>
+      `;
     }
+  }
 
-    void displayStatus() {
-        cout << "\n--- Current Allocation ---\n";
-        for (auto p : programs) {
-            cout << "Program " << p.id << ": CPU = " << p.cpuUsage 
-                 << "%, Memory = " << p.memoryUsage << "MB\n";
-        }
-    }
-};
+  function processResources() {
+    const totalCPU = parseFloat(document.getElementById("totalCPU").value);
+    const totalMem = parseFloat(document.getElementById("totalMem").value);
+    const num = parseInt(document.getElementById("numPrograms").value);
 
-int main() {
-    double totalCPUusage, totalMemoryusage;
-    int n;
+    let programs = [];
+    let usedCPU = 0, usedMem = 0;
 
-    cout << "Enter total CPU capacity (%): ";
-    cin >> totalCPUusage;
-    cout << "Enter total Memory capacity (MB): ";
-    cin >> totalMemoryusage;
-
-    ResourceManager manager(totalCPUusage, totalMemoryusage);
-
-    cout << "Enter number of programs: ";
-    cin >> n;
-
-    for (int i = 0; i < n; ++i) {
-        double cpu, mem;
-        cout << "\nProgram " << i + 1 << " CPU usage (%): ";
-        cin >> cpu;
-        cout << "Program " << i + 1 << " Memory usage (MB): ";
-        cin >> mem;
-        manager.addProgram(i + 1, cpu, mem);
+    for (let i = 1; i <= num; i++) {
+      const cpu = parseFloat(document.getElementById(`cpu${i}`).value);
+      const mem = parseFloat(document.getElementById(`mem${i}`).value);
+      programs.push({ id: i, cpuUsage: cpu, memoryUsage: mem });
+      usedCPU += cpu;
+      usedMem += mem;
     }
 
-    manager.optimizeResources();
-    manager.displayStatus();
+    if (usedCPU > totalCPU || usedMem > totalMem) {
+      alert("Optimizing resources...");
+      for (let p of programs) {
+        p.cpuUsage = (p.cpuUsage / usedCPU) * totalCPU;
+        p.memoryUsage = (p.memoryUsage / usedMem) * totalMem;
+      }
+    }
 
-    return 0;
-}
+    let output = "--- Current Allocation ---\n";
+    for (let p of programs) {
+      output += `Program ${p.id}: CPU = ${p.cpuUsage.toFixed(2)}%, Memory = ${p.memoryUsage.toFixed(2)}MB\n`;
+    }
+
+    document.getElementById("output").textContent = output;
+  }
+</script>
+
+</body>
+</html>
+<!-- gives memory to the file that requires more memory out of the available memory. The program will also optimize the CPU usage and memory allocation if the total CPU or memory exceeds the available resources. The optimized values are displayed in the output section. -->
